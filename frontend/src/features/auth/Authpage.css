@@ -1,0 +1,13 @@
+.auth__heading{
+    display: flex;
+    align-items: center;
+}
+.auth__form{
+    display: grid;
+    gap: 20px;
+    max-width: 720px;
+}
+.auth__wrapper{
+    padding-inline: 1rem;
+    padding-top: 2rem;
+}
