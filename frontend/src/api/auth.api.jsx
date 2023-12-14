@@ -7,3 +7,6 @@ export const register = (registerUser) => {
 export const login = (loginUser) => {
   return instance.post("/api/v1/auth/login", loginUser);
 };
+export const getCurrentUser = () => {
+  return instance.get("/api/v1/auth");
+};

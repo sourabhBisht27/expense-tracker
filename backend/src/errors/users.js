@@ -12,7 +12,7 @@ class UserNotFound extends ApiError {
 class UnAuthenticated extends ApiError {
   constructor() {
     super();
-    this.code = 400;
+    this.code = 401;
     this.message = "User not authenticated";
     this.name = "UnAuthenticated";
   }

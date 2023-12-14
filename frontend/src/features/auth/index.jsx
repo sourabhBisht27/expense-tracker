@@ -7,6 +7,9 @@ import { AuthNavigator } from "./AuthNavigator";
 import "./Authpage.css";
 import { login, register } from "../../api/auth.api";
 import { toast } from "react-toastify";
+import { isAxiosError } from "axios";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const getLoginDetails = (user) => {
   const { email, password } = user;
@@ -26,18 +29,20 @@ export default function AuthPage() {
     confirmPassword: "",
   });
   const getAuthPromise = () => {
-    if (isLogin) {
-      const loginUser = getLoginDetails(user);
-      return login(loginUser);
-    } else if (isRegister) {
-      if (!comparePassword(user.password, user.confirmPassword)) {
-        toast.error("Confirm password and password does not match");
+    return () => {
+      if (isLogin) {
+        const loginUser = getLoginDetails(user);
+        return login(loginUser);
+      } else if (isRegister) {
+        if (!comparePassword(user.password, user.confirmPassword)) {
+          toast.error("Confirm password and password does not match");
+          return null;
+        }
+        const registerUser = getRegisterDetails(user);
+        return register(registerUser);
+      } else {
         return null;
       }
-      const registerUser = getRegisterDetails(user);
-      return register(registerUser);
-    } else {
-      return null;
     }
   };
   const [authType, setAuthType] = useState("login");
@@ -49,13 +54,29 @@ export default function AuthPage() {
   };
   const onChangeAuthToRegister = () => setAuthType("register");
   const onChangeAuthToLogin = () => setAuthType("login");
-
+  const authContext = useAuth();
+  const navigate = useNavigate();
   const onAuthSubmit = async (e) => {
     e.preventDefault();
     const authPromise = getAuthPromise();
     if (authPromise) {
-      const { data } = await authPromise;
-      console.log(data);
+      try {
+        const { data } = await authPromise();
+        if (isLogin) {
+          const {token, ...user} = data.data;
+          localStorage.setItem("token", token);
+          if (authContext) {
+            authContext.onSetCurrentUser(user);
+            console.log(data.data);
+            navigate("/", { replace: true });
+          }
+        } else if (isRegister) {
+
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error(isAxiosError(error) ? error.response.data.message : "Error occured")
+      }
     }
   };
 

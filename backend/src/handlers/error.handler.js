@@ -13,6 +13,10 @@ module.exports = function (err, req, res, next) {
   if (err.name === "ValidationError") {
     code = 400;
   }
+  if (err.name === "JsonWebTokenError") {
+    code = 401
+    message = "User not authenticated"
+  }
   if (process.env.NODE_ENV === "development") {
     console.log(err);
   }
