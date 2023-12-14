@@ -13,7 +13,7 @@ module.exports = function (err, req, res, next) {
   if (err.name === "ValidationError") {
     code = 400;
   }
-  if (err.name === "JsonWebTokenError") {
+  if (err.name === "JsonWebTokenError" || err.name === "TokenExpiredError") {
     code = 401
     message = "User not authenticated"
   }

@@ -68,7 +68,7 @@ export default function AuthPage() {
           if (authContext) {
             authContext.onSetCurrentUser(user);
             console.log(data.data);
-            navigate("/", { replace: true });
+            navigate("/dashboard", { replace: true });
           }
         } else if (isRegister) {
 

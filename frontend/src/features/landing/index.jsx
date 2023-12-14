@@ -1,9 +1,8 @@
-import PrivateContainer from "../common/PrivateContainer";
 
 export default function LandingPage() {
   return (
-    <PrivateContainer>
+    <main>
       <h1>Landing</h1>
-    </PrivateContainer>
+    </main>
   );
 }

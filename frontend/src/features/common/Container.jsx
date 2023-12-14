@@ -1,8 +1,8 @@
 import { ToastContainer } from "react-toastify";
-
+import './Container.css'
 const Container = ({ children }) => {
   return (
-    <main>
+    <main className="main">
       {children}
       <ToastContainer
         position="top-right"

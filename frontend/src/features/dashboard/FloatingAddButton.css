@@ -1,0 +1,11 @@
+.floating__add {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    border: 4px solid rgb(85, 84, 84);
+    cursor: pointer;
+}
+
+.floating__add:hover {
+    border: 4px solid black
+}

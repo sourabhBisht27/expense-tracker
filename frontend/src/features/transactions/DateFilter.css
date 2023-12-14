@@ -1,0 +1,13 @@
+.trans__dateFilters{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+.trans__dateFilters > input{
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    outline: none;
+    border: 1px solid purple;
+}
