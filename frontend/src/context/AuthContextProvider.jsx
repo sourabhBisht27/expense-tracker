@@ -5,7 +5,7 @@ import { getCurrentUser } from "../api/auth.api";
 export default function AuthContextProvider({ children }) {
     const [user, setUser] = useState(null);
     const [status, setStatus] = useState("loading");
-    const loading = status === "loading";
+    
     const onSetCurrentUser = (currentUser) => {
         setUser(currentUser);
     }
@@ -25,6 +25,6 @@ export default function AuthContextProvider({ children }) {
     return <AuthContext.Provider value={{
         onSetCurrentUser,
         user,
-        loading
+        status
     }}>{children}</AuthContext.Provider>
 }

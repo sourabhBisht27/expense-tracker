@@ -1,0 +1,15 @@
+.amount__field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  border: 2px solid lightgray;
+}
+
+.amount__field > input {
+  width: 100%;
+  border: 0;
+  font-size: 3rem;
+  padding: 0.5rem;
+  outline: none;
+}

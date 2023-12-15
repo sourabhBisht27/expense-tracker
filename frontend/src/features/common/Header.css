@@ -1,19 +1,25 @@
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    border-bottom: 2px solid lightgray;
-    height: 10svh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 2px solid lightgray;
+  height: 10svh;
 }
 
 .header__links {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  list-style: none;
 }
 
-.header__links>li>a {
-    font-weight: 600;
+.header__links > li > a {
+  font-weight: 600;
+}
+.header__banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
 }

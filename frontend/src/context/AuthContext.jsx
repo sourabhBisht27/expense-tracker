@@ -3,7 +3,7 @@ import { createContext } from "react";
 const AuthContext = createContext({
     user: null,
     onSetCurrentUser: undefined,
-    loading: true,
+    status : "loading"
 });
 
 export default AuthContext;

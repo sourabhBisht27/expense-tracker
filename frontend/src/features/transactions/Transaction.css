@@ -1,0 +1,39 @@
+.transac__catIcon {
+  border: 2px solid var(--secondary-color);
+  border-radius: 70px;
+  padding: 0.3rem;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transaction {
+  display: grid;
+  border: 1px solid var(--primary-color);
+  padding: 0.3rem;
+  grid-template-columns: auto 1fr auto;
+}
+
+.transac__title {
+  display: flex;
+  margin-left: 0.3rem;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.transac__description {
+  font-size: small;
+  color: rgb(126, 121, 121);
+}
+.transac__amount > span {
+  font-size: 1.2rem;
+}
+.transac__amount > .expense {
+  color: red;
+}
+.transac__amount > .income {
+  color: green;
+}

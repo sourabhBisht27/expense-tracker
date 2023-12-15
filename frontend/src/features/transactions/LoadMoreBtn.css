@@ -1,0 +1,20 @@
+.load__more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--primary-color);
+  padding: 0.3rem;
+  cursor: pointer;
+}
+.load__more > p {
+  font-size: small;
+}
+.load__moreWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.load__more:hover {
+  background-color: #a19e9e;
+}

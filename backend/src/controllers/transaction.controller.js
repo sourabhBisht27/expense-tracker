@@ -8,12 +8,12 @@ exports.createTransaction = requestAsyncHandler(async (req, res) => {
     const transactionBody = await transactionDto.validateAsync(req.body);
     const transaction = { ...transactionBody, user: req.user._id };
     const newTransaction = await Transaction.createNew(transaction);
-    return res.status(201).json({ status: true, message: `New transaction added with id : ${newTransaction._id}`, data: newTransaction })
+    return res.status(201).json({ status: true, message: `New transaction added`, data: newTransaction })
 })
 
 exports.getAllTransactions = requestAsyncHandler(async (req, res) => {
     const { filter, limit, select, skip } = req.query;
-    const transactions = await Transaction.find(filter).select(select).skip(skip).limit(limit)
+    const transactions = await Transaction.find(filter).select(select).skip(skip).limit(limit).sort({ createdAt: -1 })
     const count = await Transaction.countDocuments(filter);
     return res.status(200).json({ status: true, data: { transactions, limit, skip, count } })
 })
@@ -58,3 +58,47 @@ exports.deleteTransaction = requestAsyncHandler(async (req, res) => {
 })
 
 
+exports.insertManyTransactions = requestAsyncHandler(async (req, res, next) => {
+    await Transaction.insertMany(req.body.map(tra => ({ ...tra, user: req.user._id })));
+    return res.status(200).send("Success");
+})
+
+exports.getDashboardReport = requestAsyncHandler(async (req, res, next) => {
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    const weeklyReport = await Transaction.aggregate([
+        {
+            $match: {
+                date: { $gte: oneWeekAgo },
+            },
+        },
+        {
+            $group: {
+                _id: {
+                    category: "$category"
+                },
+                totalIncome: {
+                    $sum: {
+                        $cond: { if: { $eq: ['$type', 'income'] }, then: '$amount', else: 0 },
+                    },
+                },
+                totalExpense: {
+                    $sum: {
+                        $cond: { if: { $eq: ['$type', 'expense'] }, then: '$amount', else: 0 },
+                    },
+                },
+            },
+        },
+        {
+            $project: {
+                category: "$_id.category",
+                totalIncome: 1,
+                totalExpense: 1,
+                _id: 0,
+            }
+        }
+    ])
+    const totalIncome = weeklyReport.reduce((prev, saving) => prev + saving.totalIncome, 0);
+    const totalExpense = weeklyReport.reduce((prev, saving) => prev + saving.totalExpense, 0);
+    return res.status(200).json({ data: { weeklyReport, totalIncome, totalExpense }, status: true })
+})

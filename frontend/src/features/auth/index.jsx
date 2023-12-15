@@ -28,23 +28,6 @@ export default function AuthPage() {
     name: "",
     confirmPassword: "",
   });
-  const getAuthPromise = () => {
-    return () => {
-      if (isLogin) {
-        const loginUser = getLoginDetails(user);
-        return login(loginUser);
-      } else if (isRegister) {
-        if (!comparePassword(user.password, user.confirmPassword)) {
-          toast.error("Confirm password and password does not match");
-          return null;
-        }
-        const registerUser = getRegisterDetails(user);
-        return register(registerUser);
-      } else {
-        return null;
-      }
-    }
-  };
   const [authType, setAuthType] = useState("login");
   const isLogin = authType === "login";
   const isRegister = authType === "register";
@@ -56,27 +39,47 @@ export default function AuthPage() {
   const onChangeAuthToLogin = () => setAuthType("login");
   const authContext = useAuth();
   const navigate = useNavigate();
+  async function submitLogin() {
+    try {
+      const loginUser = getLoginDetails(user);
+      const { data } = await login(loginUser);
+
+      const { token, ...currentUser } = data.data;
+      localStorage.setItem("token", token);
+      if (authContext) {
+        authContext.onSetCurrentUser(currentUser);
+        navigate("/dashboard", { replace: true });
+      }
+    } catch (error) {
+      toast.error(
+        isAxiosError(error) ? error.response.data.message : error.message
+      );
+    }
+  }
+  async function submitRegister() {
+    debugger;
+
+    try {
+      if (!comparePassword(user.password, user.confirmPassword)) {
+        toast.error("Confirm password and password does not match");
+        return null;
+      }
+      const registerUser = getRegisterDetails(user);
+      const { data } = await register(registerUser);
+      toast.success(data.message);
+      setAuthType("login");
+    } catch (error) {
+      toast.error(
+        isAxiosError(error) ? error.response.data.message : error.message
+      );
+    }
+  }
   const onAuthSubmit = async (e) => {
     e.preventDefault();
-    const authPromise = getAuthPromise();
-    if (authPromise) {
-      try {
-        const { data } = await authPromise();
-        if (isLogin) {
-          const {token, ...user} = data.data;
-          localStorage.setItem("token", token);
-          if (authContext) {
-            authContext.onSetCurrentUser(user);
-            console.log(data.data);
-            navigate("/dashboard", { replace: true });
-          }
-        } else if (isRegister) {
-
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error(isAxiosError(error) ? error.response.data.message : "Error occured")
-      }
+    if (isLogin) {
+      await submitLogin();
+    } else if (isRegister) {
+      await submitRegister();
     }
   };
 
@@ -85,10 +88,7 @@ export default function AuthPage() {
       <div className="auth__wrapper">
         {isLogin ? <AuthHeader text="Login" /> : null}
         {isRegister ? <AuthHeader text="Register" /> : null}
-        <form
-          onSubmit={onAuthSubmit}
-          className="auth__form"
-        >
+        <form onSubmit={onAuthSubmit} className="auth__form">
           {authType === "register" ? (
             <InputField
               label="Name"
@@ -148,11 +148,7 @@ export default function AuthPage() {
             text={"Already registered ? Login !"}
           />
           {isLogin ? (
-            <Button
-              className="btn__secondary"
-              btnLabel="Login"
-              type="submit"
-            />
+            <Button className="btn__secondary" btnLabel="Login" type="submit" />
           ) : null}
           {isRegister ? (
             <Button

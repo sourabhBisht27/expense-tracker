@@ -1,12 +1,16 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import FullLoader from "./Fullloader";
 
 export default function PrivateRoute({ children }) {
-    const authContext = useAuth();
-    if (authContext.loading) {
-        return <h1>Loading...</h1>
-    } else if (authContext.user) {
-        return children;
-    }
-    return <Navigate to={"/auth"} />
+  const auth = useAuth();
+  const loading = auth.status === "loading";
+  const location = useLocation();
+  return loading ? (
+    <FullLoader />
+  ) : !auth.user ? (
+    <Navigate to={"/auth"} state={{ from: location }} />
+  ) : (
+    children
+  );
 }

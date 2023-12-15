@@ -1,9 +1,27 @@
+import usePaginatedTransaction from "../../hooks/usePaginatedTransaction";
 import MainSectionContainer from "../common/MainSectionContainer";
-import DateFilter from "./DateFilter";
-
+import FloatingAddButton from "../dashboard/FloatingAddButton";
+import LoadMoreBtn from "./LoadMoreBtn";
+import SearchForm from "./SearchForm";
+import Transaction from "./Transaction";
+import "./TransactionsPage.css";
 export default function TransactionsPage() {
-    return <MainSectionContainer>
-        <h2>Transactions</h2>
-        <DateFilter />
+  const { transactions, status, onIncrementSkip, showLoadMore } =
+    usePaginatedTransaction();
+  const loading = status === "loading";
+  return (
+    <MainSectionContainer>
+      <h2>Transactions</h2>
+      <SearchForm loading={loading} />
+      <ul className="transactions">
+        {transactions.map((transaction) => (
+          <Transaction transaction={transaction} key={transaction._id} />
+        ))}
+      </ul>
+      {showLoadMore && !loading ? (
+        <LoadMoreBtn onClickLoadMore={onIncrementSkip} />
+      ) : null}
+      <FloatingAddButton />
     </MainSectionContainer>
+  );
 }

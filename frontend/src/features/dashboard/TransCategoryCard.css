@@ -1,15 +1,18 @@
-.category__head{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+.category__head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
-.category__card{
-    background-color: var(--primary-color);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 0.3rem;
-    padding: 0.5rem;
-    height: 15svh;
+.category__card {
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  height: 15svh;
+}
+.category__expense {
+  font-size: 1.2rem;
 }
