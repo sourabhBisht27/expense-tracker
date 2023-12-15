@@ -1,0 +1,12 @@
+.settings__currency {
+  font-size: 1.1rem;
+  width: 100%;
+}
+.settings__form {
+  margin-block: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-direction: column;
+}

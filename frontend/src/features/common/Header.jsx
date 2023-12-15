@@ -17,6 +17,9 @@ export default function Header() {
         <li>
           <Link to={"/transactions"}>Transactions</Link>
         </li>
+        <li>
+          <Link to={"/settings"}>Settings</Link>
+        </li>
       </ul>
     </header>
   );

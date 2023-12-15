@@ -6,6 +6,7 @@ import DashboardPage from "./features/dashboard";
 import TransactionsPage from "./features/transactions";
 import TransactionFormPage from "./features/transactions/TransactionFormPage";
 import SingleTransactionPage from "./features/transactions/SingleTransactionPage";
+import SettingsPage from "./features/settings";
 export default function App() {
   return (
     <Routes>
@@ -18,6 +19,7 @@ export default function App() {
         <Route path=":transactionId/edit" element={<TransactionFormPage />} />
         <Route path=":transactionId" element={<SingleTransactionPage />} />
       </Route>
+      <Route path="/settings" element={<SettingsPage />} />
     </Routes>
   );
 }
