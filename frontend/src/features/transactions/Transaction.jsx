@@ -25,7 +25,7 @@ const Transaction = ({ transaction }) => {
       </div>
       <div className="transac__amount">
         <span className={transaction.type}>{renderPlusOrMinus()}</span>
-        <p>{transaction.amount}</p>
+        <p> $ {transaction.amount}</p>
       </div>
     </li>
   );

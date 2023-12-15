@@ -28,6 +28,9 @@
   font-size: small;
   color: rgb(126, 121, 121);
 }
+.transac__amount {
+  text-align: right;
+}
 .transac__amount > span {
   font-size: 1.2rem;
 }
@@ -36,4 +39,7 @@
 }
 .transac__amount > .income {
   color: green;
+}
+.transac__amount > p {
+  font-weight: bold;
 }

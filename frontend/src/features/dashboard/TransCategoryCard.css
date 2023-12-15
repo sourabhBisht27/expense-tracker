@@ -10,8 +10,7 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 0.3rem;
-  padding: 0.5rem;
-  height: 15svh;
+  padding: 1rem;
 }
 .category__expense {
   font-size: 1.2rem;

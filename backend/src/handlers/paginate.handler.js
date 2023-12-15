@@ -2,15 +2,16 @@ const getPaginatedParameters = (req) => {
 
     const getFilter = () => {
         if (typeof req.query.filter === "string" && req.query.filter) {
-            return { $text: { $search: req.query.filter }, user: req.user._Id };
+            return { $text: { $search: req.query.filter }, user: req.user._id };
         }
-        return {};
+        return { user: req.user._id };
     }
     const getDatePaginatedFilter = () => {
         const textFilter = getFilter();
-        const { startDate, endDate } = req.query;
-        console.log({ endDate, startDate });
-        return textFilter;
+        const oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+        const { startDate = oneWeekAgo.toISOString().split("T")[0], endDate = new Date().toISOString().split("T")[0] } = req.query;
+        return { ...textFilter, date: { $gte: new Date(startDate), $lte: new Date(endDate) } };
     }
     const getLimit = () => {
         const limit = isNaN(parseInt(req.query.limit)) ? 10 : parseInt(req.query.limit);

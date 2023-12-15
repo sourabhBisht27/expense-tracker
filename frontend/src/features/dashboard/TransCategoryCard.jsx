@@ -6,7 +6,7 @@ import "./TransCategoryCard.css";
 export default function TransCategoryCard({ category, expense }) {
   const renderIcon = () => {
     const Icon = getCategoryIcon(category);
-    return <Icon size={30} />;
+    return <Icon size={50} />;
   };
   const categoryName = categoriesSelectOptions.expense[category];
   return (

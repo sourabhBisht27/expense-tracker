@@ -8,6 +8,12 @@ const usePaginatedTransaction = () => {
     startDate: getSevenDaysBeforeDate(new Date()).toISOString().split("T")[0],
     endDate: new Date().toISOString().split("T")[0],
   });
+  const onChangeSearchFormField = (e) => {
+    setSearchForm({
+      ...searchForm,
+      [e.currentTarget.name]: [e.currentTarget.value],
+    });
+  };
   const [transactions, setTransactions] = useState([]);
   const [status, setStatus] = useState("loading");
   const [showLoadMore, setShowLoadMore] = useState(true);
@@ -42,6 +48,7 @@ const usePaginatedTransaction = () => {
     transactions,
     showLoadMore,
     searchForm,
+    onChangeSearchFormField,
     onClickSearch: transactionsFetch("searched"),
   };
 };

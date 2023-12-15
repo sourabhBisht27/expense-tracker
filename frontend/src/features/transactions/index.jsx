@@ -6,13 +6,29 @@ import SearchForm from "./SearchForm";
 import Transaction from "./Transaction";
 import "./TransactionsPage.css";
 export default function TransactionsPage() {
-  const { transactions, status, onIncrementSkip, showLoadMore } =
-    usePaginatedTransaction();
+  const {
+    transactions,
+    status,
+    onIncrementSkip,
+    showLoadMore,
+    onClickSearch,
+    onChangeSearchFormField,
+    searchForm,
+  } = usePaginatedTransaction();
+  const searchProps = {
+    onClickSearch,
+    searchForm,
+    onChangeSearchFormField,
+  };
   const loading = status === "loading";
   return (
     <MainSectionContainer>
       <h2>Transactions</h2>
-      <SearchForm loading={loading} />
+      <SearchForm
+        loading={loading}
+        onClickSearch={onClickSearch}
+        searchProps={searchProps}
+      />
       <ul className="transactions">
         {transactions.map((transaction) => (
           <Transaction transaction={transaction} key={transaction._id} />

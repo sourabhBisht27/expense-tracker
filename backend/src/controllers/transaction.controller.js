@@ -69,6 +69,7 @@ exports.getDashboardReport = requestAsyncHandler(async (req, res, next) => {
     const weeklyReport = await Transaction.aggregate([
         {
             $match: {
+                user: req.user._id,
                 date: { $gte: oneWeekAgo },
             },
         },
