@@ -11,7 +11,7 @@ const usePaginatedTransaction = () => {
   const onChangeSearchFormField = (e) => {
     setSearchForm({
       ...searchForm,
-      [e.currentTarget.name]: [e.currentTarget.value],
+      [e.currentTarget.name]: e.currentTarget.value,
     });
   };
   const [transactions, setTransactions] = useState([]);
@@ -24,14 +24,20 @@ const usePaginatedTransaction = () => {
     return async () => {
       setStatus("loading");
       try {
-        if (state === "searched") {
-          setTransactions([]);
-        }
-        const { data } = await getAllTransactions({ ...searchForm, skip });
+        const { data } = await getAllTransactions({
+          filter: searchForm.filter,
+          endDate: searchForm.endDate,
+          startDate: searchForm.startDate,
+          skip,
+        });
         setShowLoadMore(
           data.data.transactions.length + transactions.length < data.data.count
         );
-        setTransactions([...transactions, ...data.data.transactions]);
+        if (state === "searched") {
+          setTransactions(data.data.transactions);
+        } else {
+          setTransactions([...transactions, ...data.data.transactions]);
+        }
         setStatus("success");
       } catch (error) {
         setStatus("failure");

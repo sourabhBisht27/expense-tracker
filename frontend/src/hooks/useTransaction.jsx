@@ -17,6 +17,7 @@ const useTransaction = ({ onSetEditTransaction, transactionId }) => {
           setStatus("success");
         } catch (error) {
           setStatus("failure");
+          setTransaction(null);
         }
       } else {
         setTransaction(null);

@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import DashboardPage from "./features/dashboard";
 import TransactionsPage from "./features/transactions";
 import TransactionFormPage from "./features/transactions/TransactionFormPage";
+import SingleTransactionPage from "./features/transactions/SingleTransactionPage";
 export default function App() {
   return (
     <Routes>
@@ -14,7 +15,8 @@ export default function App() {
       <Route path="/transactions">
         <Route path="" element={<TransactionsPage />} />
         <Route path="new" element={<TransactionFormPage />} />
-        <Route path="edit/:transactionId" element={<TransactionFormPage />} />
+        <Route path=":transactionId/edit" element={<TransactionFormPage />} />
+        <Route path=":transactionId" element={<SingleTransactionPage />} />
       </Route>
     </Routes>
   );

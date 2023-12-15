@@ -24,11 +24,7 @@ export default function TransactionsPage() {
   return (
     <MainSectionContainer>
       <h2>Transactions</h2>
-      <SearchForm
-        loading={loading}
-        onClickSearch={onClickSearch}
-        searchProps={searchProps}
-      />
+      <SearchForm loading={loading} searchProps={searchProps} />
       <ul className="transactions">
         {transactions.map((transaction) => (
           <Transaction transaction={transaction} key={transaction._id} />

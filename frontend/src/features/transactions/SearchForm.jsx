@@ -1,19 +1,23 @@
 import DateFilter from "./DateFilter";
 import "./SearchForm.css";
-export default function SearchForm({
-  loading,
-  searchProps,
-  onChangeSearchFormField,
-}) {
-  const { onClickSearch, searchForm } = searchProps;
+export default function SearchForm({ loading, searchProps }) {
+  const {
+    onClickSearch: onSubmitSearchForm,
+    searchForm,
+    onChangeSearchFormField,
+  } = searchProps;
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onSubmitSearchForm();
+  };
   return (
-    <form className="search__form">
+    <form onSubmit={onSubmit} className="search__form">
       <input
         value={searchForm.filter}
         onChange={onChangeSearchFormField}
         disabled={loading}
         type="search"
-        name="search"
+        name="filter"
         id="searchTransaction"
         placeholder="Search by name or description"
       />
@@ -23,7 +27,7 @@ export default function SearchForm({
           endDate={searchForm.endDate}
           onChangeSearchFormField={onChangeSearchFormField}
         />
-        <button onClick={onClickSearch} title="Search" className="btn">
+        <button title="Search" className="btn">
           Search
         </button>
       </div>

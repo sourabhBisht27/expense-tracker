@@ -6,12 +6,11 @@ export default function Header() {
     <header>
       <div className="header__banner">
         <img src={logo} alt="Company logo" width={60} height={60} />
-        <h1>EXTracker</h1>
+        <Link className="header__logo" to={"/"}>
+          <h1>EXTracker</h1>
+        </Link>
       </div>
       <ul className="header__links">
-        <li>
-          <Link to={"/"}>Home</Link>
-        </li>
         <li>
           <Link to={"/dashboard"}>Dashboard</Link>
         </li>

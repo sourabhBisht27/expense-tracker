@@ -17,13 +17,14 @@ export const getAllTransactions = ({
   startDate,
   endDate,
 }) => {
+  const params = {
+    filter,
+    skip,
+    startDate,
+    endDate,
+  };
   return instance.get(`/api/v1/transactions`, {
-    params: {
-      filter,
-      skip,
-      startDate,
-      endDate,
-    },
+    params,
   });
 };
 

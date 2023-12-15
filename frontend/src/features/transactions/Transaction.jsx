@@ -4,6 +4,7 @@ import {
   getCategoryIcon,
 } from "../../helpers/CategoriesSelect";
 import "./Transaction.css";
+import { useNavigate } from "react-router-dom";
 const Transaction = ({ transaction }) => {
   const renderIcon = () => {
     const Icon = getCategoryIcon(transaction.category);
@@ -14,8 +15,16 @@ const Transaction = ({ transaction }) => {
   };
   const categoryName =
     categoriesSelectOptions[transaction.type][transaction.category];
+  const navigate = useNavigate();
+  const onClickTransaction = () => {
+    navigate(`/transactions/${transaction._id}`);
+  };
   return (
-    <li key={transaction._id} className="transaction">
+    <li
+      onClick={onClickTransaction}
+      key={transaction._id}
+      className="transaction"
+    >
       <div>
         <div className="transac__catIcon">{renderIcon()}</div>
       </div>

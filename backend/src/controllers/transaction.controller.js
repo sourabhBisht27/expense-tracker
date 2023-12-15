@@ -3,6 +3,7 @@ const requestAsyncHandler = require("../handlers/async.handler");
 const Transaction = require("../models/Transaction");
 const { transactionDto } = require("../validator/transaction.validator");
 const { TransactionNotFound } = require("../errors/transaction");
+const { Types } = require("mongoose");
 
 exports.createTransaction = requestAsyncHandler(async (req, res) => {
     const transactionBody = await transactionDto.validateAsync(req.body);
@@ -69,7 +70,7 @@ exports.getDashboardReport = requestAsyncHandler(async (req, res, next) => {
     const weeklyReport = await Transaction.aggregate([
         {
             $match: {
-                user: req.user._id,
+                user: new Types.ObjectId(req.user._id),
                 date: { $gte: oneWeekAgo },
             },
         },

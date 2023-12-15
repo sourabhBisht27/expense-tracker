@@ -17,6 +17,13 @@ header {
 .header__links > li > a {
   font-weight: 600;
 }
+.header__logo {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+}
+
 .header__banner {
   display: flex;
   align-items: center;

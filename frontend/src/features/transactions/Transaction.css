@@ -15,7 +15,10 @@
   padding: 0.3rem;
   grid-template-columns: auto 1fr auto;
 }
-
+.transaction:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
 .transac__title {
   display: flex;
   margin-left: 0.3rem;

@@ -10,29 +10,40 @@ import {
 } from "../../api/transactions.api";
 import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 const TransForm = ({ transaction, onChangeTransaction }) => {
   const amount = transaction.amount;
+  const navigate = useNavigate();
   const onSubmitTransForm = async (e) => {
     e.preventDefault();
+    const { amount, title, description, date, type, category } = transaction;
     const transactionDto = {
-      ...transaction,
-      amount: parseFloat(parseFloat(transaction.amount).toFixed(2)),
+      title,
+      description,
+      date,
+      type,
+      category,
+      amount: parseFloat(parseFloat(amount).toFixed(2)),
     };
     try {
       const { data } = transaction._id
         ? await updateTransaction(transactionDto, transaction._id)
         : await createNewTransaction(transactionDto);
       toast.success(data.message);
+      navigate(`/transactions/${data.data._id}`);
     } catch (error) {
       toast.error(
         isAxiosError(error) ? error.response.data.message : "Some error occured"
       );
     }
   };
+  const submitDisabled =
+    transaction.title.length < 3 || ["", "0"].indexOf(transaction.amount) > -1;
   return (
     <form onSubmit={onSubmitTransForm} className="trans__form">
       <input
         type="date"
+        max={new Date().toISOString().split("T")[0]}
         name="date"
         id="date"
         onChange={onChangeTransaction}
@@ -60,16 +71,20 @@ const TransForm = ({ transaction, onChangeTransaction }) => {
         id="description"
         placeholder="Describe where and when the transaction took place"
       />
+      <TypeOfTransSelect
+        type={transaction.type}
+        onChangeTransaction={onChangeTransaction}
+      />
       <CategorySelect
         type={transaction.type}
         category={transaction.category}
         onChangeTransaction={onChangeTransaction}
       />
-      <TypeOfTransSelect
-        type={transaction.type}
-        onChangeTransaction={onChangeTransaction}
+      <Button
+        type="submit"
+        disabled={submitDisabled}
+        label={transaction._id ? "Update" : "Submit"}
       />
-      <Button />
     </form>
   );
 };
