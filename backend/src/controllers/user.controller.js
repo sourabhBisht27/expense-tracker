@@ -8,6 +8,8 @@ const {
   DuplicateUser,
   PasswordDoesNotMatch,
 } = require("../errors/users");
+const Setting = require('../models/Setting');
+const { SettingNotFound } = require('../errors/setting');
 /**
  *
  * @type {import("express").Handler}
@@ -45,11 +47,19 @@ exports.register = requestAsyncHandler(async (req, res) => {
   const { email, name, password } = registerBody;
   const user = await User.getUserByEmail(email);
   if (user) throw new DuplicateUser();
-  const avatar = gravatar.url(email, {protocol: 'http', s: '100'});
-  await User.makeUser({ email, password, name, avatar });
+  const avatar = gravatar.url(email, { protocol: 'http', s: '100' });
+  const registerdUser = await User.makeUser({ email, password, name, avatar });
+  await Setting.createSetting({ user: registerdUser._id, currencyCode: "INR", countryCode: "IN" });
   return res.status(201).json({
     status: true,
     data: { email, name },
     message: "User registered successfully",
   });
 });
+exports.userSettings = requestAsyncHandler(async (req, res) => {
+  const setting = await Setting.findOne({ user: req.user._id });
+  if (!setting) {
+    throw new SettingNotFound();
+  }
+  return res.status(200).json({ status: true, data: setting });
+})

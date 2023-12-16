@@ -3,7 +3,8 @@ header {
   align-items: center;
   justify-content: space-around;
   border-bottom: 2px solid lightgray;
-  height: 10svh;
+  flex-wrap: wrap;
+  padding-block: 0.5rem;
 }
 
 .header__links {
@@ -12,6 +13,7 @@ header {
   justify-content: center;
   gap: 0.8rem;
   list-style: none;
+  flex-wrap: wrap;
 }
 
 .header__links > li > a {

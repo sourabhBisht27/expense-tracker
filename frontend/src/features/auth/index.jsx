@@ -57,8 +57,6 @@ export default function AuthPage() {
     }
   }
   async function submitRegister() {
-    debugger;
-
     try {
       if (!comparePassword(user.password, user.confirmPassword)) {
         toast.error("Confirm password and password does not match");
@@ -74,12 +72,12 @@ export default function AuthPage() {
       );
     }
   }
-  const onAuthSubmit = async (e) => {
+  const onAuthSubmit = (e) => {
     e.preventDefault();
     if (isLogin) {
-      await submitLogin();
+      submitLogin();
     } else if (isRegister) {
-      await submitRegister();
+      submitRegister();
     }
   };
 

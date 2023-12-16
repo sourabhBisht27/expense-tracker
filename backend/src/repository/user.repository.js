@@ -16,6 +16,7 @@ module.exports = class {
    */
   static async makeUser({ email, password, name, avatar }) {
     const hashedPassword = await argon2.hash(password);
-    await this.create({ email, password: hashedPassword, name, avatar });
+    const user = await this.create({ email, password: hashedPassword, name, avatar });
+    return user;
   }
 };
