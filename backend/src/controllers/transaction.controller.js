@@ -14,7 +14,7 @@ exports.createTransaction = requestAsyncHandler(async (req, res) => {
 
 exports.getAllTransactions = requestAsyncHandler(async (req, res) => {
     const { filter, limit, select, skip } = req.query;
-    const transactions = await Transaction.find(filter).select(select).skip(skip).limit(limit).sort({ createdAt: -1 })
+    const transactions = await Transaction.find(filter).sort({ _id: -1 }).select(select).skip(skip).limit(limit);
     const count = await Transaction.countDocuments(filter);
     return res.status(200).json({ status: true, data: { transactions, limit, skip, count } })
 })

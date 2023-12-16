@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../../assets/money.svg";
+import useAuth from "../../hooks/useAuth";
 export default function Header() {
+  const auth = useAuth();
   return (
     <header>
       <div className="header__banner">
@@ -18,7 +20,16 @@ export default function Header() {
           <Link to={"/transactions"}>Transactions</Link>
         </li>
         <li>
-          <Link to={"/settings"}>Settings</Link>
+          <Link to={"/settings"}>Options</Link>
+        </li>
+        <li className="header__auth">
+          <img
+            src={auth.user.avatar}
+            alt={auth.user.name}
+            width={30}
+            height={30}
+          />
+          <span>{auth.user.name}</span>
         </li>
       </ul>
     </header>

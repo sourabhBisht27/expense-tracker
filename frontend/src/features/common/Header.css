@@ -15,7 +15,13 @@ header {
   list-style: none;
   flex-wrap: wrap;
 }
-
+.header__auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  text-transform: capitalize;
+}
 .header__links > li > a {
   font-weight: 600;
 }

@@ -47,6 +47,11 @@ const usePaginatedTransaction = () => {
   const onIncrementSkip = () => {
     setSkip((prev) => prev + 10);
   };
+  const onClickSearch = async () => {
+    setSkip(0);
+    setTransactions([]);
+    await transactionsFetch("searched")();
+  };
   return {
     skip,
     onIncrementSkip,
@@ -55,7 +60,7 @@ const usePaginatedTransaction = () => {
     showLoadMore,
     searchForm,
     onChangeSearchFormField,
-    onClickSearch: transactionsFetch("searched"),
+    onClickSearch,
   };
 };
 

@@ -32,7 +32,7 @@ exports.login = requestAsyncHandler(async (req, res) => {
     user.password
   );
   if (!isPasswordMatching) throw new PasswordDoesNotMatch();
-  const userPayload = { name: user.name, email, _id: user._id };
+  const userPayload = { name: user.name, email, _id: user._id, avatar: user.avatar };
   const token = EncDec.getToken(userPayload);
   return res
     .status(200)
