@@ -21,6 +21,9 @@ export default function DashboardPage() {
       setTotalExpense(data.data.totalExpense);
     })();
   }, []);
+  const sortByCategoryExpense = (reportA, reportB) =>
+    reportB.totalExpense - reportA.totalExpense;
+  const filterZeroExpenses = (report) => report.totalExpense;
   return (
     <MainSectionContainer>
       <h2 className="dash__name">Hello {name},</h2>
@@ -28,9 +31,11 @@ export default function DashboardPage() {
       <TransactionHead />
       <ul className="dash__transList">
         {weeklyReport
-          .filter((report) => report.totalExpense)
+          .filter(filterZeroExpenses)
+          .sort(sortByCategoryExpense)
           .map((report) => (
             <TransCategoryCard
+              totalExpense={totalExpense}
               category={report.category}
               key={report.category}
               expense={report.totalExpense}

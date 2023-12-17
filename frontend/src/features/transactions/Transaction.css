@@ -1,5 +1,5 @@
-.transac__catIcon {
-  border: 2px solid var(--secondary-color);
+.transac__catIcon_expense {
+  border: 2px solid red;
   border-radius: 70px;
   padding: 0.3rem;
   width: 45px;
@@ -8,7 +8,16 @@
   align-items: center;
   justify-content: center;
 }
-
+.transac__catIcon_income {
+  border: 2px solid green;
+  border-radius: 70px;
+  padding: 0.3rem;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .transaction {
   display: grid;
   border: 1px solid var(--primary-color);

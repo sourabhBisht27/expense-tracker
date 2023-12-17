@@ -3,6 +3,7 @@ import {
   categoriesSelectOptions,
   getCategoryIcon,
 } from "../../helpers/CategoriesSelect";
+import { IoMdTrendingDown, IoMdTrendingUp } from "react-icons/io";
 import "./Transaction.css";
 const Transaction = ({ transaction }) => {
   const renderIcon = () => {
@@ -10,7 +11,12 @@ const Transaction = ({ transaction }) => {
     return <Icon size={30} />;
   };
   const renderPlusOrMinus = () => {
-    return transaction.type === "expense" ? "-" : "+";
+    const TRENDING_SIZE = 20;
+    return transaction.type === "expense" ? (
+      <IoMdTrendingDown size={TRENDING_SIZE} />
+    ) : (
+      <IoMdTrendingUp size={TRENDING_SIZE} />
+    );
   };
   const categoryName =
     categoriesSelectOptions[transaction.type][transaction.category];
@@ -25,7 +31,9 @@ const Transaction = ({ transaction }) => {
       className="transaction"
     >
       <div>
-        <div className="transac__catIcon">{renderIcon()}</div>
+        <div className={`transac__catIcon_${transaction.type}`}>
+          {renderIcon()}
+        </div>
       </div>
       <div className="transac__title">
         <p>{transaction.title}</p>
