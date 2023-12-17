@@ -63,3 +63,8 @@ exports.userSettings = requestAsyncHandler(async (req, res) => {
   }
   return res.status(200).json({ status: true, data: setting });
 })
+
+exports.logout = requestAsyncHandler(async (req, res) => {
+  req.user = null;
+  return res.status(200).json({ status: true, message: "Logout success" });
+})

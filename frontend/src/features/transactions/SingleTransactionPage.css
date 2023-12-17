@@ -1,3 +1,6 @@
 .single {
   line-height: 2rem;
 }
+.single__type {
+  text-transform: capitalize;
+}

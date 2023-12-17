@@ -66,7 +66,8 @@ exports.insertManyTransactions = requestAsyncHandler(async (req, res, next) => {
 
 exports.getDashboardReport = requestAsyncHandler(async (req, res, next) => {
     const oneWeekAgo = new Date();
-    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    const DAYS_IN_WEEK = 7;
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - DAYS_IN_WEEK);
     const weeklyReport = await Transaction.aggregate([
         {
             $match: {

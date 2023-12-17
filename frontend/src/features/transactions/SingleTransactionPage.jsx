@@ -22,7 +22,7 @@ const SingleTransactionPage = () => {
   if (loading) {
     return <FullLoader />;
   }
-  
+
   return (
     <MainSectionContainer>
       {transaction ? (
@@ -30,8 +30,7 @@ const SingleTransactionPage = () => {
           {renderIcon()}
           <h2>{transaction.title}</h2>
           <p>{transaction.description}</p>
-          <p>Type : {transaction.type}</p>
-          <p>Category Name : {transaction.category}</p>
+          <p className="single__type">Type : {transaction.type}</p>
           {categoryName ? <p>Category : {categoryName}</p> : null}
           <p>
             Transaction Done on :{" "}

@@ -10,3 +10,7 @@ export const login = (loginUser) => {
 export const getCurrentUser = () => {
   return instance.get("/api/v1/auth");
 };
+
+export const logout = () => {
+  return instance.post("/api/v1/auth/logout");
+};

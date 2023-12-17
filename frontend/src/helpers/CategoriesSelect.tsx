@@ -48,6 +48,7 @@ const categoryIcons = {
   insurance: AiFillInsurance,
   loanPayments: GiPayMoney,
   entertainment: GiMusicalNotes,
+  food: PiBowlFoodDuotone,
   education: PiStudentBold,
   medicalExpenses: GiMedicalPack,
 };

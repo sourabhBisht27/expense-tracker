@@ -14,3 +14,21 @@
   font-size: small;
   color: gray;
 }
+.setting__logoutBtn {
+  background-color: rgba(165, 14, 14, 0.877);
+  font-weight: 600;
+  padding: 0.3rem;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+.setting__logoutBtn:hover {
+  opacity: 0.8;
+}
+.setting__btnsWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}

@@ -1,8 +1,11 @@
 import "./LandingPage.css";
 import logo from "../../../assets/money.svg";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 export default function LandingPage() {
+  const auth = useAuth();
+  const landingBtnRoute = auth.user ? "/dashboard" : "/auth";
   return (
     <main className="main__landing">
       <section className="landing__left">
@@ -13,7 +16,7 @@ export default function LandingPage() {
           </div>
           <p>Track your expenses or income from anywhere</p>
           <div className="landing__btns">
-            <Link className="landing__auth" to={"/auth"}>
+            <Link className="landing__auth" to={landingBtnRoute}>
               Add expense
             </Link>
           </div>

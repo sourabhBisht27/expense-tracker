@@ -5,11 +5,29 @@ import "./SettingsPage.css";
 import { toast } from "react-toastify";
 import { updateSetting } from "../../api/setting.api";
 import { isAxiosError } from "axios";
+import { logout } from "../../api/auth.api";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 const SettingsPage = () => {
   const settingContext = useSettings();
   const settings = settingContext.settings;
   const countryCode = settings ? settings.countryCode : "IN";
   const currencyCode = settings ? settings.currencyCode : "INR";
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const onLogout = async () => {
+    try {
+      const { data } = await logout();
+      auth.onSetCurrentUser(null);
+      settingContext.onSetSettings(null);
+      localStorage.clear();
+      navigate("/auth", { replace: true });
+    } catch (error) {
+      toast.error(
+        isAxiosError(error) ? error.response.data.message : "Some error occured"
+      );
+    }
+  };
   const onChangeCurrencyCode = async (e) => {
     try {
       const [countryCode, currencyCode] = e.currentTarget.value.split(":");
@@ -30,6 +48,11 @@ const SettingsPage = () => {
 
   return (
     <MainSectionContainer>
+      <div className="setting__btnsWrapper">
+        <button onClick={onLogout} className="setting__logoutBtn">
+          Logout
+        </button>
+      </div>
       <h2>Settings</h2>
       <p className="instruction">
         Update your settings here and navigate to dashboard.
