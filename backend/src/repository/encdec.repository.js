@@ -33,8 +33,8 @@ module.exports = class {
      * @returns {{email : string; name;string; _id : string, avatar?:string}} jwtPayload 
      */
     static decryptToken(token) {
-        return verify(token , jwt.JWT_SECRET,{
-            expiresIn: "1h",
+        return verify(token, jwt.JWT_SECRET, {
+            expiresIn: "1y",
             notBefore: "0",
             algorithm: "HS256",
             audience: jwt.JWT_AUDIENCE,
