@@ -1,10 +1,9 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   categoriesSelectOptions,
   getCategoryIcon,
 } from "../../helpers/CategoriesSelect";
 import "./Transaction.css";
-import { useNavigate } from "react-router-dom";
 const Transaction = ({ transaction }) => {
   const renderIcon = () => {
     const Icon = getCategoryIcon(transaction.category);

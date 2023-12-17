@@ -1,4 +1,3 @@
-import React from "react";
 import countryCodes from "../../../assets/currency.json";
 import useSettings from "../../hooks/useSettings";
 import MainSectionContainer from "../common/MainSectionContainer";

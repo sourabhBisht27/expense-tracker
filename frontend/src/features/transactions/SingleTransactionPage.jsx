@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import useTransaction from "../../hooks/useTransaction";
 import MainSectionContainer from "../common/MainSectionContainer";
@@ -23,6 +22,7 @@ const SingleTransactionPage = () => {
   if (loading) {
     return <FullLoader />;
   }
+  
   return (
     <MainSectionContainer>
       {transaction ? (
@@ -31,6 +31,7 @@ const SingleTransactionPage = () => {
           <h2>{transaction.title}</h2>
           <p>{transaction.description}</p>
           <p>Type : {transaction.type}</p>
+          <p>Category Name : {transaction.category}</p>
           {categoryName ? <p>Category : {categoryName}</p> : null}
           <p>
             Transaction Done on :{" "}
