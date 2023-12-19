@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink as Link } from "react-router-dom";
 import "./Header.css";
 import logo from "../../../assets/money.svg";
 import useAuth from "../../hooks/useAuth";

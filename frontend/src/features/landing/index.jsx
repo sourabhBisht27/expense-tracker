@@ -8,10 +8,11 @@ export default function LandingPage() {
   const landingBtnRoute = auth.user ? "/dashboard" : "/auth";
   return (
     <main className="main__landing">
-      <section className="landing__left">
+      <section className="landing__left"></section>
+      <section className="landing__center">
         <div className="landing">
           <div className="landing__banner">
-            <img src={logo} alt="Landing page logo" width={200} height={200} />
+            <img src={logo} alt="Landing page logo" width={300} height={300} />
             <h1>ExTracker</h1>
           </div>
           <p>Track your expenses or income from anywhere</p>

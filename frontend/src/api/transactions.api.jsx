@@ -31,3 +31,7 @@ export const getAllTransactions = ({
 export const getTransactionsDashboard = () => {
   return instance.get("/api/v1/transactions/dashboard");
 };
+
+export const deleteTransaction = (transactionId) => {
+  return instance.delete(`/api/v1/transactions/${transactionId}`);
+};

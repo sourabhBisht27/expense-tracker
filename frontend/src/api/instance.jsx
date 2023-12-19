@@ -1,4 +1,5 @@
 import axios, { isAxiosError } from "axios";
+import { toast } from "react-toastify";
 
 const instance = axios.create({
   baseURL: "http://localhost:9000",
@@ -19,6 +20,7 @@ instance.interceptors.response.use(
   function (error) {
     if (isAxiosError(error) && error.response?.status === 401) {
       localStorage.clear();
+      toast.error("Login again");
     }
     return Promise.reject(error);
   }

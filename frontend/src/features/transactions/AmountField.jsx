@@ -1,8 +1,11 @@
 import { useEffect, useRef } from "react";
 import "./AmountField.css";
+import useSettings from "../../hooks/useSettings";
 const AmountField = ({ amount, onChangeTransaction }) => {
   const inputRef = useRef(null);
   const divRef = useRef(null);
+  const settingsContext = useSettings();
+  const settings = settingsContext.settings || { currencyCode: "INR" };
   const onFocusAmount = (state) => {
     return () => {
       if (divRef.current) {
@@ -31,7 +34,7 @@ const AmountField = ({ amount, onChangeTransaction }) => {
   }, []);
   return (
     <div ref={divRef} className="amount__field">
-      <span>$</span>
+      <span>{settings.currencyCode}</span>
       <input
         ref={inputRef}
         value={amount}
