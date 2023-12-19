@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useTransaction from "../../hooks/useTransaction";
 import MainSectionContainer from "../common/MainSectionContainer";
 import FullLoader from "../common/Fullloader";
@@ -37,6 +37,7 @@ const SingleTransactionPage = () => {
       }
       const { data } = await deleteTransaction(transaction._id);
       toast.info(data.message);
+      navigate("/transactions");
     } catch (error) {
       toast.error(
         isAxiosError(error) ? error.response.data.message : "Some error occured"
@@ -84,6 +85,7 @@ const SingleTransactionPage = () => {
         <div className="single__notFound">
           <h1>Transaction was removed</h1>
           <FcMoneyTransfer size={300} />
+          <Link to={"/transactions"}>All Transactions</Link>
         </div>
       )}
       <FloatingAddButton />

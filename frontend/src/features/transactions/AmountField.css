@@ -8,8 +8,13 @@
 
 .amount__field > input {
   width: 100%;
+  padding: 0.3rem;
   border: 0;
   font-size: 3rem;
-  padding: 0.5rem;
   outline: none;
+}
+.amount__currency {
+  padding: 0.3rem;
+  background-color: var(--secondary-color);
+  color: white;
 }

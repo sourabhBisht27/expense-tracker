@@ -34,7 +34,7 @@ const AmountField = ({ amount, onChangeTransaction }) => {
   }, []);
   return (
     <div ref={divRef} className="amount__field">
-      <span>{settings.currencyCode}</span>
+      <span className="amount__currency">{settings.currencyCode}</span>
       <input
         ref={inputRef}
         value={amount}

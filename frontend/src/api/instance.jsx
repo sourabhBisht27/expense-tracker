@@ -20,7 +20,11 @@ instance.interceptors.response.use(
   function (error) {
     if (isAxiosError(error) && error.response?.status === 401) {
       localStorage.clear();
-      toast.error("Login again");
+
+      if (window.location.pathname !== "/auth") {
+        window.location.href = "/auth";
+        toast.error("Session expired! Login again");
+      }
     }
     return Promise.reject(error);
   }
