@@ -12,11 +12,9 @@ module.exports = {
     },
     getMongoDbConfig() {
         const dbUrl = process.env.MONGO_URI;
-        const user = process.env.MONGO_INITDB_ROOT_USERNAME;
-        const pass = process.env.MONGO_INITDB_ROOT_PASSWORD;
-        if (!dbUrl || !user || !pass) {
+        if (!dbUrl) {
             throw new Error("Mongodb config missing")
         }
-        return { dbUrl, user, pass };
+        return { dbUrl, };
     }
 }

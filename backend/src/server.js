@@ -1,14 +1,15 @@
-const NODE_ENV = process.env.NODE_ENV || "";
+const dotenvPath =
+  process.env.NODE_ENV !== "production"
+    ? `../.env${`${process.env.NODE_ENV ? `.${process.env.NODE_ENV}` : ""}`}`
+    : "../.env";
 require("dotenv").config({
-  path : `../.env.${NODE_ENV}`,
+  path: dotenvPath,
 });
 const mongoose = require("mongoose");
-const { dbUrl, user, pass } = require("./config").getMongoDbConfig();
+const { dbUrl } = require("./config").getMongoDbConfig();
+
 mongoose
-  .connect(dbUrl, {
-    user,
-    pass,
-  })
+  .connect(dbUrl)
   .then(() => {
     console.log("Connected to mongodb");
   })
