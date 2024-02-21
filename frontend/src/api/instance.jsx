@@ -2,7 +2,7 @@ import axios, { isAxiosError } from "axios";
 import { toast } from "react-toastify";
 
 const instance = axios.create({
-  baseURL: "http://localhost:9000",
+  baseURL: import.meta.env.PROD ? "" :  "http://localhost:9000",
 });
 instance.interceptors.request.use(
   (config) => {
